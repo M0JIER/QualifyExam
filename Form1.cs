@@ -36,17 +36,21 @@ namespace QualifExam
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            varId = (int)dataGridView1[0, e.RowIndex].Value;
+            if (e.RowIndex >= 0)
+            {
+                varId = (int)dataGridView1[0, e.RowIndex].Value;
 
-            txtNameEdit.Text = dataGridView1[1, e.RowIndex].Value.ToString();
-            txtAuthorEdit.Text = dataGridView1[2, e.RowIndex].Value.ToString();
-            txtYearEdit.Text = dataGridView1[3, e.RowIndex].Value.ToString();
+                txtNameEdit.Text = dataGridView1[1, e.RowIndex].Value.ToString();
+                txtAuthorEdit.Text = dataGridView1[2, e.RowIndex].Value.ToString();
+                txtYearEdit.Text = dataGridView1[3, e.RowIndex].Value.ToString();
+
+            }
 
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtYearCreate.Text, out int y)) { MessageBox.Show("¬ведите корректный год"); return; }
+            if (!int.TryParse(txtYearEdit.Text, out int y)) { MessageBox.Show("¬ведите корректный год"); return; }
 
             db.Edit(varId, new Movie()
             {
